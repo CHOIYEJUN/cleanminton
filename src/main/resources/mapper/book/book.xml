@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book">
+<!--오늘로부터 한달 뒤 데이터 까지만 가져오기-->
+	<select id="getBookingData" parameterType="Map" resultType="Map">
+		select
+			beming_seq,
+			beming_date,
+			booking_count
+		from
+			calendar_test
+		where
+			CURRENT_DATE + INTERVAL '1 month' > TO_DATE(beming_date, 'YYYY-MM-DD')
+	</select>
+
+	<select id="getBookingMemberList" parameterType="Map" resultType="Map">
+		select
+			guest_sequence,
+			guest_name,
+			host_name,
+			book_date,
+			guest_phone,
+			paydone_yn
+		from
+			booking_test
+		where
+			book_date = #{book_date}
+		order by guest_sequence
+	</select>
+
+	<insert id="insertBookingData" parameterType="Map">
+		insert into BOOKING_TEST
+		(
+			guest_sequence,
+			guest_name,
+			guest_phone,
+			host_name,
+			book_date,
+			paydone_yn
+
+		)
+		values
+		(
+			nextval('booking_test_sequence'),
+			#{name},
+			#{phone},
+			#{hostName},
+			#{date},
+		    'N'
+
+		)
+	</insert>
+
+	<update id="updateBookCount" parameterType="String">
+		update calendar_test set
+			booking_count = booking_count + 1
+		where
+		    beming_date = #{date}
+	</update>
+
+	<update id="updatePayData" parameterType="Map">
+		update BOOKING_TEST set
+			paydone_yn = #{payYn}
+		where
+			guest_sequence = #{payData}
+	</update>
+
+	<delete id="deleteData" parameterType="Map">
+		delete from BOOKING_TEST
+		where
+			guest_sequence = #{deleteData}
+	</delete>
+
+	<update id="minusBookCount" parameterType="String">
+		update calendar_test set
+			booking_count = booking_count - 1
+		where
+			beming_date = #{clickDate}
+	</update>
+
+</mapper>
