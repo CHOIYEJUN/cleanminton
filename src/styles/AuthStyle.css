@@ -1,0 +1,37 @@
+.authContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.authContainer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.authInput {
+    max-width: 320px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #dbdbdb;
+    margin-bottom: 10px;
+}
+
+.authInput.authSubmit {
+    background-color: #04aaff;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+}
+
+.authSwitch {
+    color: #04aaff;
+    cursor: pointer;
+    margin-top: 10px;
+}
