@@ -14,7 +14,7 @@ const AppRouter = ({isLoggin}) => {
               <Routes>
                   {isLoggin ? (
                         <>
-                            <Route exact path="/" element={<Home />} >
+                            <Route exact path="/home" element={<Home />} >
                             </Route>
                         </>
                     ):( <Route exact path="/" element={ <Auth />}>
