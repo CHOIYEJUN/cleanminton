@@ -1,8 +1,7 @@
 import React, {useState} from "react";
-import {gql, useMutation, useQuery} from "@apollo/client";
+import {gql, useQuery} from "@apollo/client";
 import client from "../client";
 import { useNavigate  } from "react-router-dom";
-
 
 
 const LOGIN_USER = gql`
@@ -15,19 +14,6 @@ const LOGIN_USER = gql`
         }
     }
 `;
-
-const LOGIN_MUTATION = gql`
-    mutation Login($userId: String!, $seq: Int!, $password: String!) {
-        login(userId: $userId, seq: $seq, password: $password) {
-            token
-            ok
-            error
-            userID
-        }
-    }
-`;
-
-
 const AuthForm = () => {
 
     const [userId, setUserId] = useState("");
@@ -37,7 +23,6 @@ const AuthForm = () => {
     const [name, setName] = useState("");
     const navigate = useNavigate ();
     let UserData = null;
-    const [loginMutation] = useMutation(LOGIN_MUTATION);
 
 
     const [newAccount, setNewAccount] = useState(true);
@@ -72,22 +57,22 @@ const AuthForm = () => {
 
         }else {
             try{
-                const loginInfo  = await loginMutation({
+                const { data, loading, error } = await client.query({
+                    query: LOGIN_USER,
                     variables: {
-                        userId,
-                        password,
+                        userId: userId,
+                        password: password,
                         seq: 1,
                     },
                 });
-
-                UserData = loginInfo.data.login;
+                UserData = data.loginUser;
                 console.log(UserData);
 
-                if(!UserData.ok){
+                if(UserData === null){
                     setError("아이디 혹은 비밀번호가 일치하지 않습니다.");
                     return;
-                }else if (UserData.ok){
-                    localStorage.setItem("token", UserData.token);
+                }else if (UserData){
+                    console.log("로그인 성공");
                     navigate("/home");
 
                 }
@@ -158,4 +143,5 @@ const AuthForm = () => {
             </form>
         );
 }
+
 export default AuthForm;
