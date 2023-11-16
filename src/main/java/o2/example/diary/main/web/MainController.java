@@ -1,7 +1,7 @@
-package o2.example.dairy.main.web;
+package o2.example.diary.main.web;
 
 
-import o2.example.dairy.main.service.MainService;
+import o2.example.diary.main.service.MainService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

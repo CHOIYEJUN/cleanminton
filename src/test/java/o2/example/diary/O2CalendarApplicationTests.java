@@ -1,4 +1,4 @@
-package o2.example.dairy;
+package o2.example.diary;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

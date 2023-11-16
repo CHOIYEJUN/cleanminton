@@ -1,4 +1,4 @@
-package o2.example.dairy;
+package o2.example.diary;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package o2.example.dairy.main.service;
+package o2.example.diary.main.service;
 
 
 import org.mybatis.spring.SqlSessionTemplate;

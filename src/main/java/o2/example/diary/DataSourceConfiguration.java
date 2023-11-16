@@ -1,4 +1,4 @@
-package o2.example.dairy;
+package o2.example.diary;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
